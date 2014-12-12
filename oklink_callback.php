@@ -39,7 +39,7 @@ if($type == "success") {
   // From Coinbase - callback
   $postBody = json_decode(file_get_contents('php://input'));
   $client = Oklink::withApiKey(MODULE_PAYMENT_OKLINK_APIKEY,MODULE_PAYMENT_OKLINK_APISECRET);
-  $orderId = $postBody->order->id;
+  $orderId = $postBody->id;
   $order = $client->detailOrder($orderId);
   
   if($order == null) {

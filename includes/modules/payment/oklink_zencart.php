@@ -66,6 +66,7 @@ class oklink_zencart {
       'name' => $name,
       'price' => floatval($total),
       'price_currency' => $currencyCode,
+      'custom'  => $insert_id,
       'callback_url' => $callback . "?type=" . MODULE_PAYMENT_OKLINK_CALLBACK_SECRET,
       'success_url' => $callback . "?type=success",      
     );
@@ -75,6 +76,7 @@ class oklink_zencart {
     $client = Oklink::withApiKey(MODULE_PAYMENT_OKLINK_APIKEY,MODULE_PAYMENT_OKLINK_APISECRET);
     
     try {
+      
         $button = $client->buttonsButton($params)->button;
     } catch (Exception $f) {
         $this->tokenFail($f->getMessage());
@@ -147,4 +149,3 @@ class oklink_zencart {
 function oklink_censor_use($value) {
   return "(hidden for security reasons)";
 }
-
