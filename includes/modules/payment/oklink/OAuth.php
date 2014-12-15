@@ -15,7 +15,7 @@ class Oklink_OAuth
 
     public function createAuthorizeUrl($scope)
     {
-        $url = "https://Oklink.com/oauth/authorize?response_type=code" .
+        $url = "https://oklink.com/oauth/authorize?response_type=code" .
             "&client_id=" . urlencode($this->_clientId) .
             "&redirect_uri=" . urlencode($this->_redirectUri) .
             "&scope=" . $scope;

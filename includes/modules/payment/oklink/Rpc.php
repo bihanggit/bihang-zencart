@@ -63,6 +63,12 @@ class Oklink_Rpc
                 $headers[] = "NONCE: $microseconds";
                 break;
 
+            case 'Oklink_SimpleApiKeyAuthentication':
+                // Use Simple API key
+                // Warning! This authentication mechanism is deprecated
+                $headers[] = 'Authorization: api_key ' . $auth->apiKey;
+                break;
+
             default:
                 throw new Oklink_ApiException("Invalid authentication mechanism");
                 break;
@@ -75,11 +81,9 @@ class Oklink_Rpc
         // CURL options
         $curlOpts[CURLOPT_URL] = substr(OklinkBase::WEB_BASE,0,-1).$url;
         $curlOpts[CURLOPT_HTTPHEADER] = $headers;
+        $curlOpts[CURLOPT_CAINFO] = dirname(__FILE__) . '/ca-oklink.cre';
+        $curlOpts[CURLOPT_RETURNTRANSFER] = true;
 
-        // $curlOpts[CURLOPT_CAINFO] = dirname(__FILE__) . '/ca-oklink.crt';
-        // $curlOpts[CURLOPT_RETURNTRANSFER] = true;
-        $curlOpts[CURLOPT_SSL_VERIFYPEER] = FALSE;
-        $curlOpts[CURLOPT_SSL_VERIFYHOST]=  FALSE;
         // Do request
         curl_setopt_array($curl, $curlOpts);
 
